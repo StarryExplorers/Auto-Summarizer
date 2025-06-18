@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🧠 Auto Summarizer</title>
+  <meta name="theme-color" content="#4e89ff"/>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon-192.png" type="image/png" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f9ff;
+      color: #222;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #4e89ff;
+      font-size: 2.5em;
+    }
+
+    textarea {
+      width: 100%;
+      max-width: 600px;
+      height: 200px;
+      padding: 15px;
+      font-size: 1em;
+      border: 2px solid #4e89ff;
+      border-radius: 8px;
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 12px 25px;
+      background-color: #4e89ff;
+      color: white;
+      font-size: 1em;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #366dc9;
+    }
+
+    #output {
+      margin-top: 30px;
+      max-width: 600px;
+      background: #e0ecff;
+      padding: 20px;
+      border-radius: 10px;
+      font-size: 1.1em;
+      white-space: pre-wrap;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+  </style>
+</head>
+<body>
+  <h1>🧠 Auto Summarizer</h1>
+  <p>Paste long text below and click Summarize!</p>
+
+  <textarea id="inputText" placeholder="Paste your long text here..."></textarea>
+  <br>
+  <button onclick="summarizeText()">Summarize</button>
+
+  <div id="output"></div>
+
+  <script>
+    function summarizeText() {
+      const input = document.getElementById("inputText").value.trim();
+      const outputDiv = document.getElementById("output");
+
+      if (!input) {
+        outputDiv.textContent = "Please enter some text first!";
+        return;
+      }
+
+      // Fake summary logic (shortens it for now)
+      const words = input.split(" ");
+      const summary = words.length > 40
+        ? words.slice(0, 40).join(" ") + "..."
+        : input;
+
+      outputDiv.textContent = summary;
+    }
+
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js");
+    }
+  </script>
+</body>
+  </html>
